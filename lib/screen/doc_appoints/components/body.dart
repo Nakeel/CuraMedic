@@ -10,6 +10,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 import 'doc_appointment_item.dart';
 import 'doc_available_dates_widget.dart';
+import 'doc_times_widget.dart';
 import 'view_pager_tab.dart';
 
 class Body extends StatefulWidget {
@@ -25,6 +26,7 @@ int selectedCategory = 0;
 int selectedDate = 0;
 String selectedSortBy ;
 bool isPastAppointments = false;
+List<String> selectedNightTime;
 
 PageController appointmentsController = PageController(
   initialPage: 0,
@@ -204,7 +206,15 @@ class _BodyState extends State<Body> {
 
                                           },
                                           key: Key(availableNightPeriodList[0]),
-                                      )
+                                      ),
+                                      MultiSelectChip(
+                                        availableNightPeriodList,
+                                        onSelectionChanged: (selectedList) {
+                                          setState(() {
+                                            selectedNightTime = selectedList;
+                                          });
+                                        },
+                                      ),
                                     ],
                                   ),
                                 ),
